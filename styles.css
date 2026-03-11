@@ -299,14 +299,10 @@ body {
   max-width: 42rem;
 }
 
-/* Dog Training Services */
+/* Dog Training Services — same layout as About */
 .training-services {
   padding: 3.5rem 0;
   background: var(--color-bg);
-}
-
-.training-inner {
-  max-width: 42rem;
 }
 
 .training-text {
@@ -314,6 +310,7 @@ body {
   font-size: 1.05rem;
   color: var(--color-text-muted);
   line-height: 1.6;
+  max-width: 42rem;
 }
 
 /* Products */
