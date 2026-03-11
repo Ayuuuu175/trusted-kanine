@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trusted Kanine Ltd — Dog Training, Food, Equipment & Crates</title>
+  <meta name="description" content="Trusted Kanine Ltd: quality dog training, food, equipment and crates. Browse our selection and contact us to order." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#" class="logo">Trusted Kanine Ltd</a>
+      <nav class="nav">
+        <a href="#products">Products</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button class="menu-toggle" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-inner">
+        <p class="hero-tag">Training · Dog Food · Equipment · Crates</p>
+        <h1 class="hero-title">Everything your dog needs, one trusted place</h1>
+        <p class="hero-sub">We supply quality dog training gear, nutritious food, durable equipment and safe crates. Browse our products and contact us to order — we’ll help you choose the right fit.</p>
+        <div class="hero-cta">
+          <a href="#products" class="btn btn-primary">View products</a>
+          <a href="#contact" class="btn btn-secondary">Contact us</a>
+        </div>
+      </div>
+      <div class="hero-bg" aria-hidden="true"></div>
+    </section>
+
+    <section id="about" class="about">
+      <div class="container about-inner">
+        <h2 class="section-title">Why Trusted Kanine Ltd</h2>
+        <p class="about-text">We curate dog training tools, nutritious food, durable equipment and safe crates so you can shop with confidence. No online checkout — tell us what you need and we’ll arrange your order for you.</p>
+      </div>
+    </section>
+
+    <section id="products" class="products">
+      <div class="container">
+        <h2 class="section-title">Products</h2>
+        <p class="section-sub">Prices are indicative. Contact us to confirm availability and place your order.</p>
+        <div id="products-container">
+          <p class="products-loading">Loading products…</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <div class="container contact-inner">
+        <h2 class="section-title">Order via WhatsApp</h2>
+        <p class="section-sub">Send us a message on WhatsApp with the products you want (and your dog’s size/breed if relevant). We’ll confirm availability and arrange your order.</p>
+        <a href="https://wa.me/23058311584" class="btn btn-primary btn-whatsapp" target="_blank" rel="noopener noreferrer">Message us on WhatsApp</a>
+        <p class="contact-note">+230 58311584 — We’ll respond as soon as we can.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="footer-brand">Trusted Kanine Ltd</p>
+      <p class="footer-copy">Dog training, food, equipment & crates. Contact us to order.</p>
+    </div>
+  </footer>
+
+  <!-- Optional: set your admin site URL so the official site loads products from it.
+       For local development with the Python admin server, this points at http://localhost:3001. -->
+  <script>window.TRUSTED_KANINE_API = 'http://localhost:3001';</script>
+  <script src="script.js"></script>
+</body>
+</html>

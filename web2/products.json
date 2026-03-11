@@ -1,0 +1,94 @@
+[
+  {
+    "id": "4",
+    "category": "food",
+    "name": "FOCUS Starter Mother and Baby \u2014 4kg",
+    "description": "For mother and puppy.",
+    "price": "Rs 1,450",
+    "imageUrl": "images/focus-starter-4kg.png",
+    "whatsappMessage": "Hi, I'm interested in: FOCUS Starter Mother and Baby 4kg"
+  },
+  {
+    "id": "5",
+    "category": "food",
+    "name": "FOCUS Starter Mother and Baby \u2014 12kg + 1kg free",
+    "description": "For mother and puppy. 12kg + 1kg free.",
+    "price": "Rs 4,000",
+    "imageUrl": "images/focus-starter-13kg.png",
+    "whatsappMessage": "Hi, I'm interested in: FOCUS Starter Mother and Baby 12kg + 1kg free"
+  },
+  {
+    "id": "6",
+    "category": "food",
+    "name": "FOCUS Puppy \u2014 4kg",
+    "description": "For growing puppies.",
+    "price": "Rs 1,350",
+    "imageUrl": "images/focus-puppy-4kg.png",
+    "whatsappMessage": "Hi, I'm interested in: FOCUS Puppy 4kg"
+  },
+  {
+    "id": "7",
+    "category": "food",
+    "name": "FOCUS Puppy \u2014 12kg + 1kg free",
+    "description": "For growing puppies. 12kg + 1kg free.",
+    "price": "Rs 3,770",
+    "imageUrl": "images/focus-puppy-12kg.png",
+    "whatsappMessage": "Hi, I'm interested in: FOCUS Puppy 12kg + 1kg free"
+  },
+  {
+    "id": "8",
+    "category": "food",
+    "name": "FOCUS Adult \u2014 4kg",
+    "description": "For adult dogs.",
+    "price": "Rs 1,250",
+    "imageUrl": "images/focus-adult-4kg.png",
+    "whatsappMessage": "Hi, I'm interested in: FOCUS Adult 4kg"
+  },
+  {
+    "id": "9",
+    "category": "food",
+    "name": "FOCUS Adult \u2014 12kg + 1kg free",
+    "description": "For adult dogs. 12kg + 1kg free.",
+    "price": "Rs 3,290",
+    "imageUrl": "images/focus-adult-12kg.png",
+    "whatsappMessage": "Hi, I'm interested in: FOCUS Adult 12kg + 1kg free"
+  },
+  {
+    "id": "10",
+    "category": "food",
+    "name": "DROOLS dog biscuits",
+    "description": "Dog biscuits by Drools.",
+    "price": "Rs 475",
+    "imageUrl": "images/drools-biscuits.png",
+    "whatsappMessage": "Hi, I'm interested in: DROOLS dog biscuits"
+  },
+  {
+    "id": "11",
+    "category": "equipment",
+    "name": "Slip leash",
+    "description": "Slip leash.",
+    "price": "Rs 275",
+    "imageUrl": "images/slip-leash.png",
+    "whatsappMessage": "Hi, I'm interested in: Slip leash"
+  },
+  {
+    "id": "12",
+    "category": "crates",
+    "name": "Dog crate \u2014 Medium",
+    "description": "81 \u00d7 57 \u00d7 59 cm.",
+    "price": "Rs 6,750",
+    "imageUrl": "images/crate-medium.png",
+    "images": ["images/crate-medium.png", "images/crate-large.png"],
+    "whatsappMessage": "Hi, I'm interested in: Dog crate Medium (81x57x59 cm)"
+  },
+  {
+    "id": "13",
+    "category": "crates",
+    "name": "Dog crate \u2014 Large",
+    "description": "99 \u00d7 66 \u00d7 72 cm.",
+    "price": "Rs 8,990",
+    "imageUrl": "images/crate-large.png",
+    "images": ["images/crate-medium.png", "images/crate-large.png"],
+    "whatsappMessage": "Hi, I'm interested in: Dog crate Large (99x66x72 cm)"
+  }
+]

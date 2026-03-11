@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin login — Trusted Kanine Ltd</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: 'DM Sans', system-ui, sans-serif; margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center; background: #faf8f5; color: #2d2a26; }
+    .box { background: #fff; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); width: 100%; max-width: 360px; }
+    h1 { margin: 0 0 1.5rem; font-size: 1.35rem; }
+    label { display: block; font-size: 0.9rem; font-weight: 500; margin-bottom: 0.35rem; }
+    input { width: 100%; padding: 0.75rem 1rem; font-size: 1rem; border: 1px solid #e8e4df; border-radius: 8px; margin-bottom: 1rem; }
+    button { width: 100%; padding: 0.85rem; font-size: 1rem; font-weight: 600; background: #c17f59; color: #fff; border: none; border-radius: 8px; cursor: pointer; font-family: inherit; }
+    button:hover { background: #a96b48; }
+    .error { color: #c00; font-size: 0.9rem; margin-top: 0.5rem; }
+    .back { display: inline-block; margin-top: 1rem; color: #6b6560; font-size: 0.9rem; text-decoration: none; }
+    .back:hover { color: #2d2a26; }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>Admin login</h1>
+    <form id="login-form">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required autocomplete="current-password" placeholder="Admin password" />
+      <p id="error" class="error" aria-live="polite" hidden></p>
+      <button type="submit">Log in</button>
+    </form>
+    <a href="/" class="back">← Back to site</a>
+  </div>
+  <script>
+    (function () {
+      var form = document.getElementById('login-form');
+      var errorEl = document.getElementById('error');
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        errorEl.hidden = true;
+        fetch('/api/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password: document.getElementById('password').value }),
+          credentials: 'same-origin'
+        })
+          .then(function (r) {
+            if (r.ok) window.location.href = '/admin-dashboard.html';
+            else return r.json().then(function (d) { throw new Error(d.error || 'Login failed'); });
+          })
+          .catch(function (err) {
+            errorEl.textContent = err.message || 'Login failed';
+            errorEl.hidden = false;
+          });
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin — Trusted Kanine Ltd</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: 'DM Sans', system-ui, sans-serif; margin: 0; background: #faf8f5; color: #2d2a26; padding: 1.5rem; }
+    .wrap { max-width: 900px; margin: 0 auto; }
+    h1 { margin: 0 0 0.5rem; font-size: 1.5rem; }
+    .top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem; }
+    a { color: #c17f59; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .btn { display: inline-block; padding: 0.5rem 1rem; font-size: 0.9rem; font-weight: 600; border-radius: 8px; border: none; cursor: pointer; font-family: inherit; }
+    .btn-primary { background: #c17f59; color: #fff; }
+    .btn-primary:hover { background: #a96b48; }
+    .btn-ghost { background: transparent; color: #6b6560; }
+    .btn-ghost:hover { background: #e8e4df; }
+    .btn-danger { background: #c00; color: #fff; font-size: 0.85rem; padding: 0.4rem 0.75rem; }
+    .btn-danger:hover { background: #a00; }
+    .card { background: #fff; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); padding: 1.5rem; margin-bottom: 1.5rem; }
+    .card h2 { margin: 0 0 1rem; font-size: 1.15rem; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+    th, td { text-align: left; padding: 0.6rem 0.75rem; border-bottom: 1px solid #e8e4df; }
+    th { font-weight: 600; color: #6b6560; }
+    .product-name { font-weight: 500; }
+    .product-cat { color: #6b6560; font-size: 0.9rem; }
+    .product-price { white-space: nowrap; }
+    form.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    form.grid .full { grid-column: 1 / -1; }
+    @media (max-width: 600px) { form.grid { grid-template-columns: 1fr; } }
+    label { display: block; font-size: 0.9rem; font-weight: 500; margin-bottom: 0.3rem; }
+    input, select, textarea { width: 100%; padding: 0.6rem 0.75rem; font-size: 1rem; border: 1px solid #e8e4df; border-radius: 8px; font-family: inherit; }
+    textarea { min-height: 60px; resize: vertical; }
+    .msg { padding: 0.75rem; border-radius: 8px; margin-bottom: 1rem; }
+    .msg.success { background: #e8f5e9; color: #2e7d32; }
+    .msg.error { background: #ffebee; color: #c62828; }
+    .loading { color: #6b6560; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <div>
+        <h1>Admin dashboard</h1>
+        <p style="margin:0; color:#6b6560; font-size:0.9rem;">Add, edit or remove products. Changes appear on the official website immediately.</p>
+      </div>
+      <div>
+        <a id="view-official-link" href="#" target="_blank" rel="noopener" class="btn btn-ghost">View official site</a>
+        <button type="button" class="btn btn-ghost" id="logout-btn">Log out</button>
+      </div>
+    </div>
+
+    <div id="message" class="msg" hidden></div>
+
+    <div class="card">
+      <h2>Add product</h2>
+      <form id="add-form">
+        <div class="grid">
+          <div>
+            <label for="add-category">Category</label>
+            <select id="add-category" name="category" required>
+              <option value="training">Training</option>
+              <option value="food">Food & treats</option>
+              <option value="equipment">Equipment</option>
+              <option value="crates">Crates</option>
+            </select>
+          </div>
+          <div>
+            <label for="add-name">Name</label>
+            <input type="text" id="add-name" name="name" required placeholder="e.g. FOCUS Adult — 4kg" />
+          </div>
+          <div class="full">
+            <label for="add-description">Description</label>
+            <textarea id="add-description" name="description" placeholder="Short description"></textarea>
+          </div>
+          <div>
+            <label for="add-price">Price</label>
+            <input type="text" id="add-price" name="price" placeholder="e.g. Rs 1,250 or Contact for price" />
+          </div>
+          <div>
+            <label for="add-imageUrl">Image URL</label>
+            <input type="url" id="add-imageUrl" name="imageUrl" placeholder="https://… or leave blank for placeholder" />
+          </div>
+          <div class="full">
+            <label for="add-whatsappMessage">WhatsApp pre-filled message (optional)</label>
+            <input type="text" id="add-whatsappMessage" name="whatsappMessage" placeholder="e.g. Hi, I'm interested in: Product name" />
+          </div>
+          <div>
+            <button type="submit" class="btn btn-primary">Add product</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="card">
+      <h2>Products</h2>
+      <div id="products-list">
+        <p class="loading">Loading…</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      // Set your official website URL here (used by "View official site" button). Leave as placeholder to hide the button.
+      var OFFICIAL_SITE_URL = 'https://your-official-website.com';
+      var link = document.getElementById('view-official-link');
+      if (link) {
+        if (OFFICIAL_SITE_URL && OFFICIAL_SITE_URL.indexOf('your-official-website') === -1) {
+          link.href = OFFICIAL_SITE_URL;
+        } else {
+          link.style.display = 'none';
+        }
+      }
+
+      function showMsg(text, isError) {
+        var el = document.getElementById('message');
+        el.textContent = text;
+        el.className = 'msg ' + (isError ? 'error' : 'success');
+        el.hidden = false;
+        setTimeout(function () { el.hidden = true; }, 4000);
+      }
+
+      function checkAuth(cb) {
+        fetch('/api/admin/me', { credentials: 'same-origin' })
+          .then(function (r) { return r.json(); })
+          .then(function (d) {
+            if (!d.ok) window.location.href = '/admin.html';
+            else if (cb) cb();
+          })
+          .catch(function () { window.location.href = '/admin.html'; });
+      }
+
+      document.getElementById('logout-btn').addEventListener('click', function () {
+        fetch('/api/logout', { method: 'POST', credentials: 'same-origin' })
+          .then(function () { window.location.href = '/admin.html'; });
+      });
+
+      function loadProducts() {
+        return fetch('/api/products', { credentials: 'same-origin' })
+          .then(function (r) { return r.json(); })
+          .then(function (products) {
+            var list = document.getElementById('products-list');
+            if (!products.length) {
+              list.innerHTML = '<p style="color:#6b6560;">No products yet. Add one above.</p>';
+              return;
+            }
+            var catLabels = { training: 'Training', food: 'Food & treats', equipment: 'Equipment', crates: 'Crates' };
+            var html = '<table><thead><tr><th>Category</th><th>Name</th><th>Price</th><th></th></tr></thead><tbody>';
+            products.forEach(function (p) {
+              html += '<tr data-id="' + p.id + '">' +
+                '<td class="product-cat">' + (catLabels[p.category] || p.category) + '</td>' +
+                '<td class="product-name">' + escapeHtml(p.name) + '</td>' +
+                '<td class="product-price">' + escapeHtml(p.price) + '</td>' +
+                '<td><button type="button" class="btn btn-danger delete-btn" data-id="' + p.id + '">Delete</button></td></tr>';
+            });
+            html += '</tbody></table>';
+            list.innerHTML = html;
+            list.querySelectorAll('.delete-btn').forEach(function (btn) {
+              btn.addEventListener('click', function () {
+                var id = this.getAttribute('data-id');
+                if (!confirm('Delete this product?')) return;
+                fetch('/api/products/' + id, { method: 'DELETE', credentials: 'same-origin' })
+                  .then(function (r) {
+                    if (r.ok) { loadProducts(); showMsg('Product deleted.'); }
+                    else showMsg('Could not delete.', true);
+                  })
+                  .catch(function () { showMsg('Could not delete.', true); });
+              });
+            });
+          })
+          .catch(function () {
+            document.getElementById('products-list').innerHTML = '<p class="msg error">Could not load products.</p>';
+          });
+      }
+
+      function escapeHtml(s) {
+        var div = document.createElement('div');
+        div.textContent = s;
+        return div.innerHTML;
+      }
+
+      document.getElementById('add-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+        var form = e.target;
+        var fd = new FormData(form);
+        var body = {
+          category: fd.get('category'),
+          name: fd.get('name'),
+          description: fd.get('description') || '',
+          price: fd.get('price') || 'Contact for price',
+          imageUrl: fd.get('imageUrl') || '',
+          whatsappMessage: fd.get('whatsappMessage') || ''
+        };
+        fetch('/api/products', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body),
+          credentials: 'same-origin'
+        })
+          .then(function (r) {
+            if (r.ok) return r.json();
+            return r.json().then(function (d) {
+              if (r.status === 401) throw new Error('Session expired. Please log in again.');
+              throw new Error(d.error || 'Failed');
+            });
+          })
+          .then(function () {
+            form.reset();
+            showMsg('Product added. Refreshing list…');
+            return loadProducts();
+          })
+          .then(function () {
+            showMsg('Product added.');
+          })
+          .catch(function (err) {
+            showMsg(err.message || 'Could not add product.', true);
+            if (err.message && err.message.indexOf('Session expired') !== -1) {
+              setTimeout(function () { window.location.href = '/admin.html'; }, 1500);
+            }
+          });
+      });
+
+      checkAuth(function () {
+        loadProducts();
+      });
+    })();
+  </script>
+</body>
+</html>
