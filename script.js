@@ -1,6 +1,18 @@
 (function () {
   'use strict';
 
+  // Hero background slideshow (3 photos)
+  var heroSlides = document.querySelectorAll('.hero-slide');
+  if (heroSlides.length >= 2) {
+    var currentSlide = 0;
+    function nextHeroSlide() {
+      heroSlides[currentSlide].classList.remove('active');
+      currentSlide = (currentSlide + 1) % heroSlides.length;
+      heroSlides[currentSlide].classList.add('active');
+    }
+    setInterval(nextHeroSlide, 3000);
+  }
+
   // Mobile menu toggle
   var menuToggle = document.querySelector('.menu-toggle');
   var nav = document.querySelector('.nav');
