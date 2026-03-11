@@ -343,12 +343,32 @@ body {
 }
 
 .product-image {
+  position: relative;
   height: 280px;
   background: linear-gradient(135deg, #e8e4df 0%, #d4cfc8 100%);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 1rem;
+}
+
+.product-image img[data-images] {
+  cursor: pointer;
+}
+
+.product-image-hint {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  right: 0.5rem;
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  background: rgba(255, 255, 255, 0.9);
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+  z-index: 1;
+  pointer-events: none;
 }
 
 .product-image img {

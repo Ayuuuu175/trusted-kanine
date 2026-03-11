@@ -52,12 +52,12 @@
 
     function buildProductCard(p) {
       var waUrl = 'https://wa.me/' + whatsappNumber + '?text=' + encodeURIComponent(p.whatsappMessage || ("Hi, I'm interested in: " + p.name));
-      var images = (p.images && p.images.length) ? p.images : (p.imageUrl ? [p.imageUrl] : []);
+      var images = (Array.isArray(p.images) && p.images.length) ? p.images : (p.imageUrl ? [p.imageUrl] : []);
       var mainImage = images.length ? images[0] : '';
-      var dataImages = images.length > 1 ? ' data-images=\"' + escapeHtml(JSON.stringify(images)) + '\" data-current-index=\"0\"' : '';
+      var dataImages = images.length > 1 ? ' data-images=\'' + JSON.stringify(images).replace(/'/g, '&#39;') + '\' data-current-index=\'0\' title=\'Click to see more photos\'' : '';
       return (
         '<article class="product-card">' +
-          '<div class="product-image"><img src="' + escapeHtml(mainImage) + '" alt="' + escapeHtml(p.name) + '"' + dataImages + ' /></div>' +
+          '<div class="product-image">' + (images.length > 1 ? '<span class="product-image-hint">Click to view ' + images.length + ' photos</span>' : '') + '<img src="' + escapeHtml(mainImage) + '" alt="' + escapeHtml(p.name) + '"' + dataImages + ' /></div>' +
           '<div class="product-body">' +
             '<h4 class="product-name">' + escapeHtml(p.name) + '</h4>' +
             '<p class="product-desc">' + escapeHtml(p.description) + '</p>' +
@@ -95,6 +95,7 @@
           try {
             var data = this.getAttribute('data-images');
             if (!data) return;
+            try { data = data.replace(/&#39;/g, "'"); } catch (e) {}
             var arr = JSON.parse(data);
             if (!Array.isArray(arr) || arr.length < 2) return;
             var current = parseInt(this.getAttribute('data-current-index') || '0', 10);
