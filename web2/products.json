@@ -77,8 +77,8 @@
     "name": "Dog crate \u2014 Medium",
     "description": "81 \u00d7 57 \u00d7 59 cm.",
     "price": "Rs 6,750",
-    "imageUrl": "images/crate-medium.png",
-    "images": ["images/crate-medium.png", "images/crate-large.png"],
+    "imageUrl": "images/crate-view-1.png",
+    "images": ["images/crate-view-1.png", "images/crate-view-2.png"],
     "whatsappMessage": "Hi, I'm interested in: Dog crate Medium (81x57x59 cm)"
   },
   {
@@ -87,8 +87,8 @@
     "name": "Dog crate \u2014 Large",
     "description": "99 \u00d7 66 \u00d7 72 cm.",
     "price": "Rs 8,990",
-    "imageUrl": "images/crate-large.png",
-    "images": ["images/crate-medium.png", "images/crate-large.png"],
+    "imageUrl": "images/crate-view-1.png",
+    "images": ["images/crate-view-1.png", "images/crate-view-2.png"],
     "whatsappMessage": "Hi, I'm interested in: Dog crate Large (99x66x72 cm)"
   }
 ]

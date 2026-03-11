@@ -41,8 +41,8 @@
       apiBase = window.location.origin;
     }
     var whatsappNumber = '23058311584';
-    var categoryOrder = ['training', 'food', 'equipment', 'crates'];
-    var categoryTitles = { training: 'Training', food: 'Food & treats', equipment: 'Equipment', crates: 'Crates' };
+    var categoryOrder = ['food', 'equipment', 'crates'];
+    var categoryTitles = { food: 'Food & treats', equipment: 'Equipment', crates: 'Crates' };
 
     function escapeHtml(s) {
       var div = document.createElement('div');
@@ -110,9 +110,6 @@
 
     // Fallback product list (same as your current catalogue when API is unavailable)
     var fallbackProducts = [
-      { id: '1', category: 'training', name: 'Starter training kit', description: 'Clicker, treat pouch, and short guide.', price: 'Rs 24.99', imageUrl: 'https://placehold.co/600x400/e8e4df/6b6560?text=Training+Kit', whatsappMessage: "Hi, I'm interested in: Starter training kit" },
-      { id: '2', category: 'training', name: 'Premium treat pouch', description: 'Hands-free, washable, multiple pockets.', price: 'Rs 18.50', imageUrl: 'https://placehold.co/600x400/e8e4df/6b6560?text=Treat+Pouch', whatsappMessage: "Hi, I'm interested in: Premium treat pouch" },
-      { id: '3', category: 'training', name: 'Training lead (6 ft)', description: 'Durable nylon, comfortable handle.', price: 'Rs 14.99', imageUrl: 'https://placehold.co/600x400/e8e4df/6b6560?text=Training+Lead', whatsappMessage: "Hi, I'm interested in: Training lead (6 ft)" },
       { id: '4', category: 'food', name: 'FOCUS Starter Mother and Baby — 4kg', description: 'For mother and puppy.', price: 'Rs 1,450', imageUrl: 'images/focus-starter-4kg.png', whatsappMessage: "Hi, I'm interested in: FOCUS Starter Mother and Baby 4kg" },
       { id: '5', category: 'food', name: 'FOCUS Starter Mother and Baby — 12kg + 1kg free', description: 'For mother and puppy. 12kg + 1kg free.', price: 'Rs 4,000', imageUrl: 'images/focus-starter-13kg.png', whatsappMessage: "Hi, I'm interested in: FOCUS Starter Mother and Baby 12kg + 1kg free" },
       { id: '6', category: 'food', name: 'FOCUS Puppy — 4kg', description: 'For growing puppies.', price: 'Rs 1,350', imageUrl: 'images/focus-puppy-4kg.png', whatsappMessage: "Hi, I'm interested in: FOCUS Puppy 4kg" },
@@ -121,8 +118,8 @@
       { id: '9', category: 'food', name: 'FOCUS Adult — 12kg + 1kg free', description: 'For adult dogs. 12kg + 1kg free.', price: 'Rs 3,290', imageUrl: 'images/focus-adult-12kg.png', whatsappMessage: "Hi, I'm interested in: FOCUS Adult 12kg + 1kg free" },
       { id: '10', category: 'food', name: 'DROOLS dog biscuits', description: 'Dog biscuits by Drools.', price: 'Rs 475', imageUrl: 'images/drools-biscuits.png', whatsappMessage: "Hi, I'm interested in: DROOLS dog biscuits" },
       { id: '11', category: 'equipment', name: 'Slip leash', description: 'Slip leash.', price: 'Rs 275', imageUrl: 'images/slip-leash.png', whatsappMessage: "Hi, I'm interested in: Slip leash" },
-      { id: '12', category: 'crates', name: 'Dog crate — Medium', description: '81 × 57 × 59 cm.', price: 'Rs 6,750', imageUrl: 'images/crate-medium.png', images: ['images/crate-medium.png', 'images/crate-large.png'], whatsappMessage: "Hi, I'm interested in: Dog crate Medium (81x57x59 cm)" },
-      { id: '13', category: 'crates', name: 'Dog crate — Large', description: '99 × 66 × 72 cm.', price: 'Rs 8,990', imageUrl: 'images/crate-large.png', images: ['images/crate-medium.png', 'images/crate-large.png'], whatsappMessage: "Hi, I'm interested in: Dog crate Large (99x66x72 cm)" }
+      { id: '12', category: 'crates', name: 'Dog crate — Medium', description: '81 × 57 × 59 cm.', price: 'Rs 6,750', imageUrl: 'images/crate-view-1.png', images: ['images/crate-view-1.png', 'images/crate-view-2.png'], whatsappMessage: "Hi, I'm interested in: Dog crate Medium (81x57x59 cm)" },
+      { id: '13', category: 'crates', name: 'Dog crate — Large', description: '99 × 66 × 72 cm.', price: 'Rs 8,990', imageUrl: 'images/crate-view-1.png', images: ['images/crate-view-1.png', 'images/crate-view-2.png'], whatsappMessage: "Hi, I'm interested in: Dog crate Large (99x66x72 cm)" }
     ];
 
     if (apiBase) {
