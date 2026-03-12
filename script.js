@@ -19,6 +19,35 @@
   window.addEventListener('load', scrollToTopIfNoHash);
   window.addEventListener('pageshow', scrollToTopIfNoHash);
 
+  function scrollToHashTarget(hash, behavior) {
+    try {
+      if (!hash || hash.charAt(0) !== '#' || hash.length < 2) return false;
+      var id = hash.slice(1);
+      var target = document.getElementById(id);
+      if (!target) return false;
+
+      var header = document.querySelector('.site-header');
+      var headerOffset = header ? (header.getBoundingClientRect().height || 0) : 0;
+      var y = target.getBoundingClientRect().top + window.pageYOffset - headerOffset - 8;
+      window.scrollTo({ top: Math.max(0, y), behavior: behavior || 'smooth' });
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  // If the page loads with a hash, ensure we land on the right section (mobile Safari can jump wrong).
+  function fixInitialHashScroll() {
+    try {
+      if (typeof window.location !== 'undefined' && window.location.hash) {
+        scrollToHashTarget(window.location.hash, 'auto');
+      }
+    } catch (e) {}
+  }
+
+  window.addEventListener('load', fixInitialHashScroll);
+  window.addEventListener('pageshow', fixInitialHashScroll);
+
   // Hero background slideshow (3 photos)
   var heroSlides = document.querySelectorAll('.hero-slide');
   if (heroSlides.length >= 2) {
@@ -48,9 +77,6 @@
 
         if (!isHashLink) return;
 
-        var target = document.getElementById(href.slice(1));
-        if (!target) return;
-
         // Prevent mobile browsers from jumping to the wrong place when the fixed menu closes.
         e.preventDefault();
 
@@ -62,14 +88,41 @@
           }
         } catch (err) {}
 
-        // Scroll with sticky header offset.
-        var header = document.querySelector('.site-header');
-        var headerOffset = header ? (header.getBoundingClientRect().height || 0) : 0;
-        var y = target.getBoundingClientRect().top + window.pageYOffset - headerOffset - 8;
-        window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+        scrollToHashTarget(href, 'smooth');
       });
     });
   }
+
+  // Handle ALL in-page hash links (e.g. hero buttons) consistently on mobile/desktop.
+  document.addEventListener('click', function (e) {
+    var a = e.target && e.target.closest ? e.target.closest('a') : null;
+    if (!a) return;
+    var href = a.getAttribute('href') || '';
+    var isHashLink = href.charAt(0) === '#' && href.length > 1;
+    if (!isHashLink) return;
+
+    // Let default behavior happen for links that don't match an element.
+    if (!document.getElementById(href.slice(1))) return;
+
+    e.preventDefault();
+
+    // Close mobile menu if open.
+    try {
+      if (nav && nav.classList.contains('is-open')) {
+        nav.classList.remove('is-open');
+      }
+    } catch (err) {}
+
+    try {
+      if (typeof history !== 'undefined' && history.pushState) {
+        history.pushState(null, '', href);
+      } else {
+        window.location.hash = href;
+      }
+    } catch (err) {}
+
+    scrollToHashTarget(href, 'smooth');
+  });
 
   // Load products from API (or fallback to static if opened as file)
   var container = document.getElementById('products-container');
