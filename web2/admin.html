@@ -33,6 +33,14 @@
   </div>
   <script>
     (function () {
+      // If auth is disabled on the server, skip the login page.
+      fetch('/api/admin/me', { credentials: 'same-origin' })
+        .then(function (r) { return r.json(); })
+        .then(function (d) {
+          if (d && d.ok) window.location.href = '/admin-dashboard.html';
+        })
+        .catch(function () {});
+
       var form = document.getElementById('login-form');
       var errorEl = document.getElementById('error');
       form.addEventListener('submit', function (e) {
