@@ -8,16 +8,25 @@
     }
   } catch (e) {}
 
+  function forceTop() {
+    try { window.scrollTo(0, 0); } catch (e) {}
+    try { window.requestAnimationFrame(function () { try { window.scrollTo(0, 0); } catch (e) {} }); } catch (e) {}
+    try { setTimeout(function () { try { window.scrollTo(0, 0); } catch (e) {} }, 50); } catch (e) {}
+    try { setTimeout(function () { try { window.scrollTo(0, 0); } catch (e) {} }, 250); } catch (e) {}
+  }
+
   function scrollToTopIfNoHash() {
     try {
       if (typeof window.location !== 'undefined' && !window.location.hash) {
-        window.scrollTo(0, 0);
+        forceTop();
       }
     } catch (e) {}
   }
 
+  window.addEventListener('DOMContentLoaded', scrollToTopIfNoHash);
   window.addEventListener('load', scrollToTopIfNoHash);
   window.addEventListener('pageshow', scrollToTopIfNoHash);
+  try { window.addEventListener('beforeunload', scrollToTopIfNoHash); } catch (e) {}
 
   function scrollToHashTarget(hash, behavior) {
     try {
@@ -182,6 +191,14 @@
       });
       container.innerHTML = html || '<p class="section-sub">No products at the moment.</p>';
       initImageToggles();
+
+      // After dynamic content loads, fix scroll position on mobile browsers.
+      scrollToTopIfNoHash();
+      try {
+        if (typeof window.location !== 'undefined' && window.location.hash) {
+          scrollToHashTarget(window.location.hash, 'auto');
+        }
+      } catch (e) {}
     }
 
     function initImageToggles() {
