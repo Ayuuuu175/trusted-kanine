@@ -40,8 +40,33 @@
       menuToggle.setAttribute('aria-label', nav.classList.contains('is-open') ? 'Close menu' : 'Open menu');
     });
     nav.querySelectorAll('a').forEach(function (link) {
-      link.addEventListener('click', function () {
+      link.addEventListener('click', function (e) {
+        var href = link.getAttribute('href') || '';
+        var isHashLink = href.charAt(0) === '#' && href.length > 1;
+
         nav.classList.remove('is-open');
+
+        if (!isHashLink) return;
+
+        var target = document.getElementById(href.slice(1));
+        if (!target) return;
+
+        // Prevent mobile browsers from jumping to the wrong place when the fixed menu closes.
+        e.preventDefault();
+
+        try {
+          if (typeof history !== 'undefined' && history.pushState) {
+            history.pushState(null, '', href);
+          } else {
+            window.location.hash = href;
+          }
+        } catch (err) {}
+
+        // Scroll with sticky header offset.
+        var header = document.querySelector('.site-header');
+        var headerOffset = header ? (header.getBoundingClientRect().height || 0) : 0;
+        var y = target.getBoundingClientRect().top + window.pageYOffset - headerOffset - 8;
+        window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
       });
     });
   }
