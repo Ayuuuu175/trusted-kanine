@@ -313,6 +313,10 @@ body {
   max-width: 42rem;
 }
 
+.btn-training-contact {
+  margin-top: 1.25rem;
+}
+
 /* Products */
 .products {
   padding: 2rem 0 4rem;
