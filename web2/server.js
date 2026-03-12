@@ -38,7 +38,12 @@ app.use(session({
   secret: process.env.SESSION_SECRET || 'trusted-kanine-admin-secret-change-in-production',
   resave: false,
   saveUninitialized: false,
-  cookie: { secure: process.env.NODE_ENV === 'production', httpOnly: true, maxAge: 24 * 60 * 60 * 1000 }
+  cookie: {
+    secure: false, // allow over HTTP/HTTPS so hosted dashboards keep sessions reliably
+    httpOnly: true,
+    sameSite: 'lax',
+    maxAge: 24 * 60 * 60 * 1000
+  }
 }));
 
 // ——— Public API (used by the official website to display products) ———
