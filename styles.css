@@ -192,6 +192,19 @@ body {
   margin: 0 0 1rem;
 }
 
+.hero-tag-link {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  padding-bottom: 2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.hero-tag-link:hover {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
 .hero-title {
   font-family: var(--font-heading);
   font-size: clamp(2rem, 5vw, 2.75rem);

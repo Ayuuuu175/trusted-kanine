@@ -174,7 +174,7 @@
       categoryOrder.forEach(function (cat) {
         var list = byCategory[cat];
         if (list.length === 0) return;
-        html += '<div class="category">';
+        html += '<div class="category" id="cat-' + escapeHtml(cat) + '">';
         html += '<h3 class="category-title">' + escapeHtml(categoryTitles[cat]) + '</h3>';
         html += '<div class="product-grid">';
         list.forEach(function (p) { html += buildProductCard(p); });
