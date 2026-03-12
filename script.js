@@ -1,6 +1,24 @@
 (function () {
   'use strict';
 
+  // Always start at top on refresh (but keep hash navigation working)
+  try {
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+  } catch (e) {}
+
+  function scrollToTopIfNoHash() {
+    try {
+      if (typeof window.location !== 'undefined' && !window.location.hash) {
+        window.scrollTo(0, 0);
+      }
+    } catch (e) {}
+  }
+
+  window.addEventListener('load', scrollToTopIfNoHash);
+  window.addEventListener('pageshow', scrollToTopIfNoHash);
+
   // Hero background slideshow (3 photos)
   var heroSlides = document.querySelectorAll('.hero-slide');
   if (heroSlides.length >= 2) {
